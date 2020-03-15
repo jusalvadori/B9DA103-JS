@@ -70,8 +70,7 @@ testset = Data[-indexes,]
 #build the model using the training dataset
 rpart_model <- rpart(Response~X1+X2+X3+X4+X5+X6+X7, data=trainset, method="class")
 #plot tree
-plot(rpart_model)
-text(rpart_model)
+plot(as.party(rpart_model))
 print(rpart_model)
 
 # make a prediction using the test dataset
@@ -124,8 +123,7 @@ testset = Data[-indexes,]
 #build the model using the training dataset
 rpart_model <- rpart(Response~Y1+Y2+Y3+Y4+Y5+Y6+Y7, data=trainset, method="class")
 #plot tree
-plot(rpart_model)
-text(rpart_model)
+plot(as.party(rpart_model))
 print(rpart_model)
 
 # make a prediction using the test dataset
@@ -180,8 +178,7 @@ testset = Data1[-indexes,]
 #build the model using the training dataset
 rpart_model <- rpart(Response~., data=trainset, method="class")
 #plot tree
-plot(rpart_model)
-text(rpart_model)
+plot(as.party(rpart_model))
 print(rpart_model)
 
 # make a prediction using the test dataset
@@ -236,8 +233,7 @@ testset = Data2[-indexes,]
 #build the model using the training dataset
 rpart_model <- rpart(Response~X1+X2+X3+X4+X5+X6+X7, data=trainset, method="class")
 #plot tree
-plot(rpart_model)
-text(rpart_model)
+plot(as.party(rpart_model))
 print(rpart_model)
 
 # make a prediction using the test dataset
@@ -289,8 +285,7 @@ testset = Data2[-indexes,]
 #build the model using the training dataset
 rpart_model <- rpart(Response~Y1+Y2+Y3+Y4+Y5+Y6+Y7, data=trainset, method="class")
 #plot tree
-plot(rpart_model)
-text(rpart_model)
+plot(as.party(rpart_model))
 print(rpart_model)
 
 # make a prediction using the test dataset
@@ -345,8 +340,7 @@ testset = Data2[-indexes,]
 #build the model using the training dataset
 rpart_model <- rpart(Response~., data=trainset, method="class")
 #plot tree
-plot(rpart_model)
-text(rpart_model)
+plot(as.party(rpart_model))
 print(rpart_model)
 
 # make a prediction using the test dataset
@@ -401,8 +395,7 @@ testset = Data3[-indexes,]
 #build the model using the training dataset
 rpart_model <- rpart(Response~X1+X2+X3+X4+X5+X6+X7, data=trainset, method="class")
 #plot tree
-plot(rpart_model)
-text(rpart_model)
+plot(as.party(rpart_model))
 print(rpart_model)
 
 # make a prediction using the test dataset
@@ -454,8 +447,7 @@ testset = Data3[-indexes,]
 #build the model using the training dataset
 rpart_model <- rpart(Response~Y1+Y2+Y3+Y4+Y5+Y6+Y7, data=trainset, method="class")
 #plot tree
-plot(rpart_model)
-text(rpart_model)
+plot(as.party(rpart_model))
 print(rpart_model)
 
 # make a prediction using the test dataset
@@ -510,8 +502,7 @@ testset = Data3[-indexes,]
 #build the model using the training dataset
 rpart_model <- rpart(Response~., data=trainset, method="class")
 #plot tree
-plot(rpart_model)
-text(rpart_model)
+plot(as.party(rpart_model))
 print(rpart_model)
 
 # make a prediction using the test dataset
