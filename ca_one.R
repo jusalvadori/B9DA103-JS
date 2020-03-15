@@ -26,8 +26,8 @@ str(Data)
 
 ##################### Model 1 - Develop the DT model over Xs for all data #####################################
 
-#build the DT model
-DT_Model <-rpart(Response~X1+X2+X3+X4+X5+X6+X7, data=Data)#,  maxdepth=4) 
+##build the DT model
+DT_Model <-rpart(Response~X1+X2+X3+X4+X5+X6+X7, data=Data) #,  maxdepth=4) 
                                                            #, control=rpart.control(minsplit=60,
                                                            #   minbucket=30, 
                                                            #   maxdepth=4 ))
@@ -41,7 +41,7 @@ DT_Model <-rpart(Response~X1+X2+X3+X4+X5+X6+X7, data=Data)#,  maxdepth=4)
 plot(as.party(DT_Model))
 print(DT_Model)
 
-#Procedure of Pruning
+##Procedure of Pruning
 
 #The following line fitted tree's CP table (Matrix of Information on optimal pruning given Complexity Parameter). 
 #Look where do you see the least error.
@@ -57,6 +57,33 @@ cp <- DT_Model$cptable [opt,"CP"]
 DT_Model_pruned <- prune(DT_Model, cp=cp)
 plot(as.party(DT_Model_pruned))
 print(DT_Model_pruned)
+
+
+## Training the dataset to find the accuracy
+
+# split the dataset to trainset and testset 
+n=nrow(Data) 
+indexes = sample(n, n*(80/100)) 
+trainset= Data[indexes,] 
+testset = Data[-indexes,] 
+
+#build the model using the training dataset
+rpart_model <- rpart(Response~X1+X2+X3+X4+X5+X6+X7, data=trainset, method="class")
+#plot tree
+plot(rpart_model)
+text(rpart_model)
+print(rpart_model)
+
+# make a prediction using the test dataset
+pred = predict(rpart_model, testset, type = "class")   
+
+# confusion matrix
+table_mat <- table(testset$Response, pred)
+table_mat
+
+# accuracy
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+
 
 
 ##################### Model 2 - Develop the DT model over Ys for all data #####################################
