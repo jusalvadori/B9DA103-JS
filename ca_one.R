@@ -78,12 +78,12 @@ print(rpart_model)
 pred = predict(rpart_model, testset, type = "class")   
 
 # confusion matrix
-table_mat <- table(testset$Response, pred)
-table_mat
+table_matrix <- table(testset$Response, pred)
+table_matrix
 
 # accuracy
-accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
-
+accuracy <- sum(diag(table_matrix)) / sum(table_matrix)
+print(paste('Accuracy for model 1 =', accuracy))
 
 
 ##################### Model 2 - Develop the DT model over Ys for all data #####################################
@@ -111,6 +111,34 @@ cp <- DT_Model$cptable [opt,"CP"]
 DT_Model_pruned <- prune(DT_Model, cp=cp)
 plot(as.party(DT_Model_pruned))
 print(DT_Model_pruned)
+
+
+## Training the dataset to find the accuracy
+
+# split the dataset to trainset and testset 
+n=nrow(Data) 
+indexes = sample(n, n*(80/100)) 
+trainset= Data[indexes,] 
+testset = Data[-indexes,] 
+
+#build the model using the training dataset
+rpart_model <- rpart(Response~Y1+Y2+Y3+Y4+Y5+Y6+Y7, data=trainset, method="class")
+#plot tree
+plot(rpart_model)
+text(rpart_model)
+print(rpart_model)
+
+# make a prediction using the test dataset
+pred = predict(rpart_model, testset, type = "class")   
+
+# confusion matrix
+table_matrix <- table(testset$Response, pred)
+table_matrix
+
+# accuracy
+accuracy <- sum(diag(table_matrix)) / sum(table_matrix)
+print(paste('Accuracy for model 2 =', accuracy))
+
 
 ##################### Model 3 - Develop the DT model over Xs and Ys for all data ##############################
 
@@ -141,6 +169,33 @@ DT_Model_pruned <- prune(DT_Model, cp=cp)
 plot(as.party(DT_Model_pruned))
 print(DT_Model_pruned)
 
+## Training the dataset to find the accuracy
+
+# split the dataset to trainset and testset 
+n=nrow(Data1) 
+indexes = sample(n, n*(80/100)) 
+trainset= Data1[indexes,] 
+testset = Data1[-indexes,] 
+
+#build the model using the training dataset
+rpart_model <- rpart(Response~., data=trainset, method="class")
+#plot tree
+plot(rpart_model)
+text(rpart_model)
+print(rpart_model)
+
+# make a prediction using the test dataset
+pred = predict(rpart_model, testset, type = "class")   
+
+# confusion matrix
+table_matrix <- table(testset$Response, pred)
+table_matrix
+
+# accuracy
+accuracy <- sum(diag(table_matrix)) / sum(table_matrix)
+print(paste('Accuracy for model 3 =', accuracy))
+
+
 ##################### Model 4 - Develop the DT model over Xs for Group=0 #####################################
 
 #select only rows where Group=0
@@ -170,6 +225,33 @@ DT_Model_pruned <- prune(DT_Model, cp=cp)
 plot(as.party(DT_Model_pruned))
 print(DT_Model_pruned)
 
+## Training the dataset to find the accuracy
+
+# split the dataset to trainset and testset 
+n=nrow(Data2) 
+indexes = sample(n, n*(80/100)) 
+trainset= Data2[indexes,] 
+testset = Data2[-indexes,] 
+
+#build the model using the training dataset
+rpart_model <- rpart(Response~X1+X2+X3+X4+X5+X6+X7, data=trainset, method="class")
+#plot tree
+plot(rpart_model)
+text(rpart_model)
+print(rpart_model)
+
+# make a prediction using the test dataset
+pred = predict(rpart_model, testset, type = "class")   
+
+# confusion matrix
+table_matrix <- table(testset$Response, pred)
+table_matrix
+
+# accuracy
+accuracy <- sum(diag(table_matrix)) / sum(table_matrix)
+print(paste('Accuracy for model 4 =', accuracy))
+
+
 ##################### Model 5 - Develop the DT model over Ys for Group=0 #####################################
 
 #build the DT model
@@ -195,6 +277,33 @@ cp <- DT_Model$cptable [opt,"CP"]
 DT_Model_pruned <- prune(DT_Model, cp=cp)
 plot(as.party(DT_Model_pruned))
 print(DT_Model_pruned)
+
+## Training the dataset to find the accuracy
+
+# split the dataset to trainset and testset 
+n=nrow(Data2) 
+indexes = sample(n, n*(80/100)) 
+trainset= Data2[indexes,] 
+testset = Data2[-indexes,] 
+
+#build the model using the training dataset
+rpart_model <- rpart(Response~Y1+Y2+Y3+Y4+Y5+Y6+Y7, data=trainset, method="class")
+#plot tree
+plot(rpart_model)
+text(rpart_model)
+print(rpart_model)
+
+# make a prediction using the test dataset
+pred = predict(rpart_model, testset, type = "class")   
+
+# confusion matrix
+table_matrix <- table(testset$Response, pred)
+table_matrix
+
+# accuracy
+accuracy <- sum(diag(table_matrix)) / sum(table_matrix)
+print(paste('Accuracy for model 5 =', accuracy))
+
 
 ##################### Model 6 - Develop the DT model over Xs and Ys for Group=0 ##############################
 
@@ -225,6 +334,33 @@ DT_Model_pruned <- prune(DT_Model, cp=cp)
 plot(as.party(DT_Model_pruned))
 print(DT_Model_pruned)
 
+## Training the dataset to find the accuracy
+
+# split the dataset to trainset and testset 
+n=nrow(Data2) 
+indexes = sample(n, n*(80/100)) 
+trainset= Data2[indexes,] 
+testset = Data2[-indexes,] 
+
+#build the model using the training dataset
+rpart_model <- rpart(Response~., data=trainset, method="class")
+#plot tree
+plot(rpart_model)
+text(rpart_model)
+print(rpart_model)
+
+# make a prediction using the test dataset
+pred = predict(rpart_model, testset, type = "class")   
+
+# confusion matrix
+table_matrix <- table(testset$Response, pred)
+table_matrix
+
+# accuracy
+accuracy <- sum(diag(table_matrix)) / sum(table_matrix)
+print(paste('Accuracy for model 6 =', accuracy))
+
+
 ##################### Model 7 - Develop the DT model over Xs for Group=1 #####################################
 
 #select only rows where Group=1
@@ -254,6 +390,33 @@ DT_Model_pruned <- prune(DT_Model, cp=cp)
 plot(as.party(DT_Model_pruned))
 print(DT_Model_pruned)
 
+## Training the dataset to find the accuracy
+
+# split the dataset to trainset and testset 
+n=nrow(Data3) 
+indexes = sample(n, n*(80/100)) 
+trainset= Data3[indexes,] 
+testset = Data3[-indexes,] 
+
+#build the model using the training dataset
+rpart_model <- rpart(Response~X1+X2+X3+X4+X5+X6+X7, data=trainset, method="class")
+#plot tree
+plot(rpart_model)
+text(rpart_model)
+print(rpart_model)
+
+# make a prediction using the test dataset
+pred = predict(rpart_model, testset, type = "class")   
+
+# confusion matrix
+table_matrix <- table(testset$Response, pred)
+table_matrix
+
+# accuracy
+accuracy <- sum(diag(table_matrix)) / sum(table_matrix)
+print(paste('Accuracy for model 7 =', accuracy))
+
+
 ##################### Model 8 - Develop the DT model over Ys for Group=1 #####################################
 
 #build the DT model
@@ -279,6 +442,33 @@ cp <- DT_Model$cptable [opt,"CP"]
 DT_Model_pruned <- prune(DT_Model, cp=cp)
 plot(as.party(DT_Model_pruned))
 print(DT_Model_pruned)
+
+## Training the dataset to find the accuracy
+
+# split the dataset to trainset and testset 
+n=nrow(Data3) 
+indexes = sample(n, n*(80/100)) 
+trainset= Data3[indexes,] 
+testset = Data3[-indexes,] 
+
+#build the model using the training dataset
+rpart_model <- rpart(Response~Y1+Y2+Y3+Y4+Y5+Y6+Y7, data=trainset, method="class")
+#plot tree
+plot(rpart_model)
+text(rpart_model)
+print(rpart_model)
+
+# make a prediction using the test dataset
+pred = predict(rpart_model, testset, type = "class")   
+
+# confusion matrix
+table_matrix <- table(testset$Response, pred)
+table_matrix
+
+# accuracy
+accuracy <- sum(diag(table_matrix)) / sum(table_matrix)
+print(paste('Accuracy for model 8 =', accuracy))
+
 
 ##################### Model 9 - Develop the DT model over Xs and Ys for Group=1 ##############################
 
@@ -308,3 +498,29 @@ cp <- DT_Model$cptable [opt,"CP"]
 DT_Model_pruned <- prune(DT_Model, cp=cp)
 plot(as.party(DT_Model_pruned))
 print(DT_Model_pruned)
+
+## Training the dataset to find the accuracy
+
+# split the dataset to trainset and testset 
+n=nrow(Data3) 
+indexes = sample(n, n*(80/100)) 
+trainset= Data3[indexes,] 
+testset = Data3[-indexes,] 
+
+#build the model using the training dataset
+rpart_model <- rpart(Response~., data=trainset, method="class")
+#plot tree
+plot(rpart_model)
+text(rpart_model)
+print(rpart_model)
+
+# make a prediction using the test dataset
+pred = predict(rpart_model, testset, type = "class")   
+
+# confusion matrix
+table_matrix <- table(testset$Response, pred)
+table_matrix
+
+# accuracy
+accuracy <- sum(diag(table_matrix)) / sum(table_matrix)
+print(paste('Accuracy for model 9 =', accuracy))
