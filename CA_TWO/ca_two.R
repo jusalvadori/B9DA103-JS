@@ -38,11 +38,11 @@ Data2 <- Data
 
 #impute missing data to all the remaining variables  
 imputed = complete(mice(Data1,m=5,maxit=50,meth='pmm',seed=500))
-View(imputed)
+#View(imputed)
 
 Data <- imputed
 Data$Income <- Data2$Income
-View(Data)
+#View(Data)
 
 #########################################################################################################
 #Step 1: The first step is to determine the missing values of “Income” that are actually equal to 0. 
@@ -76,7 +76,7 @@ Data$Binary_Income <- as.factor(Data$Binary_Income)
 Data$Dummy <- as.factor(Data$Dummy)
 str(Data)
 
-View(Data)
+#View(Data)
 
 
 #########################################################################################################
@@ -86,7 +86,7 @@ View(Data)
 
 #remove column Income and select only non-null Binary_Income rows
 Data1 <- Data[!is.na(Data$Binary_Income), ] %>% select(-c(Income, Dummy))
-View(Data1)
+#View(Data1)
 
 #Use a regression model for the Binary_Income using the all remaining variables as independent variables
 fitmodel = glm (Binary_Income ~ ., data = Data1, family = 'binomial') # binomial(link=logit)) 
@@ -187,6 +187,10 @@ for(i in 1:nrow(Data))
                       beta_values[9]  * Data$college[i]  +
                       beta_values[10] * Data$workmos[i]  +
                       beta_values[11] * Data$workhrs[i] 
+     
+    #check for negative Income an set to zero
+    if (Data$Income[i] < 0)
+    { Data$Income[i] = 0 }
   }
 }
 
@@ -199,12 +203,20 @@ nrow(predicted_zero)
 predicted_one  = Data[ Data$Binary_Income == 1 & Data$Dummy == 0, ]
 nrow(predicted_one)
 
+
 #########################################################################################################
 #Step 8: The Mean and SD for the non-zero predicted “Income”. 
 #########################################################################################################
 
+# all data
 mean = mean(Data$Income[Data$Income > 0])
 mean
 sd   = sd(Data$Income[Data$Income > 0])
+sd
+
+# only predicted rows
+mean = mean(Data$Income[Data$Income > 0 & Data$Dummy == 0])
+mean
+sd   = sd(Data$Income[Data$Income > 0 & Data$Dummy == 0])
 sd
 
