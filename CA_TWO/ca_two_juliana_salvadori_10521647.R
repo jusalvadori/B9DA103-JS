@@ -144,9 +144,11 @@ Data2 <- Data[ Data$Binary_Income == 1, ] %>% select(-c(Binary_Income, Dummy))
 #View(Data2)
 
 #Use a regression model for the Income using the all remaining variables as independent variables
-fitmodel = glm (Income ~ ., data = Data2, family = 'gaussian')  # linear regression
+fitmodel = lm(Income ~ ., data=Data2)  # linear regression
 fitsummary <- summary(fitmodel) 
 fitsummary
+
+fitsummary$r.squared 
 
 #########################################################################################################
 #Step 6:The outcome of such model would allow you to predict the missing values for the “Income” variable, 
